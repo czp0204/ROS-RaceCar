@@ -1,0 +1,15 @@
+<launch>
+  <include file="$(find slam_sim_demo)/launch/include/robot_gmapping.launch.xml"/>
+
+  <!-- Move base >
+ <include file="$(find navigation_sim_demo)/launch/include/move_base.launch.xml"/-->
+
+  <!-- Spawn the MUXs -->
+  <arg name="racecar_version" default="racecar-v2" />
+  <include file="$(find racecar)/launch/mux.launch" ns="vesc" />
+
+  <!--Launch the simulation joystick control-->
+  <rosparam command="load" file="$(find racecar_gazebo)/config/keyboard_teleop.yaml" />
+  <node pkg="racecar_gazebo" type="keyboard_teleop.py" name="keyboard_teleop" />
+
+</launch>

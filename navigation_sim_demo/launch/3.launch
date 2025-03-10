@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="use_rviz" default="true" />
+    <!-- for amcl -->    
+    <arg name="init_x" default="0.0" />
+    <arg name="init_y" default="0.0" />
+    <arg name="init_a" default="0.0" />
+
+  <!-- Map server -->
+  <arg name="map_file" default="$(find slam_sim_demo)/maps/final_map.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+    <!-- ODOMETRY -->
+    <!--rf2o_Laser_Odometry-->
+    <include file="$(find navigation_sim_demo)/launch/includes/rf2o.launch.xml" />
+
+    <!-- AMCL -->
+    <include file="$(find navigation_sim_demo)/launch/includes/robot_amcl.launch.xml">
+        <arg name="initial_pose_x" value="$(arg init_x)"/>
+        <arg name="initial_pose_y" value="$(arg init_y)"/>
+        <arg name="initial_pose_a" value="$(arg init_a)"/>
+    	<arg name="odom_frame_id"   default="odom"/>
+    </include>
+
+    <!-- Robot_Localization -->
+    <!--node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true"-->
+	<node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+        <rosparam command="load" file="$(find navigation_sim_demo)/param/ekf_param/ekf_params_rf2oimu.yaml" />
+	</node>
+
+<!--纯追踪控制器 大家可以自己写控制器，别被局限了^^-->
+<node pkg="racecar_control" type="L1_controller_v222" respawn="false" name="L1_controller_v222" output="screen">    
+<param name="a1" value="0.35"/>
+<param name="a2" value="0.2"/>
+<param name="baseSpeed" value="2.0" />
+<param name="AngleGain" value="-7.5" />
+<!--param name="baseSpeed" value="1.35"/ -->
+<!--param name="AngleGain" value="-5.2"/ -->
+</node>
+
+  <!-- Move base -->
+ <include file="$(find navigation_sim_demo)/launch/includes/move_base.launch.xml"/>
+<!-- Rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find navigation_sim_demo)/rviz/navigation.rviz" if="$(arg use_rviz)" />
+</launch>

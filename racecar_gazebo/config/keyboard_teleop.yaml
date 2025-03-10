@@ -1,0 +1,3 @@
+keyboard_teleop:
+  speed: 1.5
+  max_steering_angle: 1

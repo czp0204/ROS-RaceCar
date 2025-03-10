@@ -1,0 +1,22 @@
+<!-- 
+    ROS navigation stack with velocity smoother and safety (reactive) controller
+-->
+<launch>
+
+  <param name="/use_sim_time" value="true"/>
+  <!-- 加载各种参数文件 具体参数可见ros wiki -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find navigation_sim_demo)/param/local_costmap_params.yaml" command="load" />   
+    <rosparam file="$(find navigation_sim_demo)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find navigation_sim_demo)/param/teb_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find navigation_sim_demo)/param/move_base_params.yaml" command="load" />
+    <rosparam file="$(find navigation_sim_demo)/param/global_planner_params.yaml" command="load" />
+    
+    <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+    
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+
+    <param name="clearing_rotation_allowed" value="false" />
+
+  </node>
+</launch>
