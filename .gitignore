@@ -1,6 +1,10 @@
 # Prerequisites
 *.d
-
+build/
+devel/
+/navigation_sim_demo/CMakeFiles/
+/robot_localization/CMakeFiles/
+/robot_localization/catkin_generated/
 # Compiled Object files
 *.slo
 *.lo
@@ -30,3 +34,11 @@
 *.exe
 *.out
 *.app
+*.make
+*.cmake
+*.stamp
+*.log
+*.swp
+*.pyc
+#*
+Makefile
