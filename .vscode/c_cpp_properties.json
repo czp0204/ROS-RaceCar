@@ -1,0 +1,23 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/czp/Racecar/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/czp/Racecar/src/ROS-RaceCar/rf2o_laser_odometry/include/**",
+        "/home/czp/Racecar/src/ROS-RaceCar/robot_localization/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

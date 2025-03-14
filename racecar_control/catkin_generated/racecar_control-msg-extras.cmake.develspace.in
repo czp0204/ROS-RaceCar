@@ -1,0 +1,2 @@
+set(racecar_control_MESSAGE_FILES "/home/czp/Racecar/src/ROS-RaceCar/racecar_control/msg/L1_controller_v2.msg")
+set(racecar_control_SERVICE_FILES "")
